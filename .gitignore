@@ -1,0 +1,50 @@
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+
+# VitePress
+.vitepress/dist
+.vitepress/cache
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# 数据库运行时文件（仅保留 .sql 与建库脚本）
+*.db
+*.sqlite
+*.sqlite3
+
+# 部署产物
+*.zip
+*.7z
+*.rar
+
+# IDE / 编辑器
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# 操作系统
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 临时
+temp/
+tmp/
+*.log
+*.bak
+
+# 环境变量与密钥
+.env
+.env.*
+!.env.example
+*.pem
+*.key
