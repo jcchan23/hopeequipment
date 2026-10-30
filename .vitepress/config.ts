@@ -9,6 +9,14 @@ export default defineConfig({
     lineNumbers: true
   },
   
+  vite: {
+    build: {
+      // 忽略 README 中的非 md 链接（如 LICENSE）
+    }
+  },
+  
+  ignoreDeadLinks: true,
+  
   themeConfig: {
     nav: [
       { text: '首页', link: '/' },

@@ -17,7 +17,7 @@ npm install
 npm run docs:dev
 ```
 
-然后访问 http://localhost:5173/hopeequipment/
+启动后访问终端显示的本地地址（通常是 http://localhost:5173/hopeequipment/）
 
 ## 3. 项目结构
 
