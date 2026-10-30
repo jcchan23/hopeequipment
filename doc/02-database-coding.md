@@ -48,7 +48,7 @@ CREATE TABLE users (
 );
 ```
 
-> 对应源码：[03-backend-detail.md §3.1](./03-backend-detail.md#31-完整代码)（main.py 运行时建表）、[02-database-detail.md §3.1](./02-database-detail.md#31-建表-sql)（users 表最终结构）
+> 对应源码：[03-backend-detail.md §3.1](./03-backend-detail.md#_31-完整代码)（main.py 运行时建表）、[02-database-detail.md §3.1](./02-database-detail.md#_31-建表-sql)（users 表最终结构）
 
 **2. 设备表设计**
 
@@ -61,7 +61,7 @@ CREATE TABLE users (
 | lens | `ref_id`, `mount` | 关联机身 + 卡口 |
 | accessory | `ref_id`, `acc_type` | 关联机身 + 配件类型 |
 
-> 对应源码：[02-database-detail.md §4.2-§4.5](./02-database-detail.md#42-camera-表--相机)（四张设备表的特殊列：`mount` / `ref_id` / `acc_type`）
+> 对应源码：[02-database-detail.md §4.2-§4.5](./02-database-detail.md#_42-camera-表--相机)（四张设备表的特殊列：`mount` / `ref_id` / `acc_type`）
 
 **3. 表关系**
 
@@ -73,7 +73,7 @@ camera/camcorder ←── accessory (ref_id)
 - 一台机身可以有多个镜头和配件（一对多）
 - `ref_id` 存储关联的机身 ID
 
-> 对应源码：[02-database-detail.md §4.5](./02-database-detail.md#45-accessory-表--配件)（`accessory.ref_id`）、[§4.4](./02-database-detail.md#44-lens-表--镜头)（`lens.ref_id`）、[04-frontend-detail.md §7.3](./04-frontend-detail.md#73-dashboardvue--仪表盘)（按 `ref_id` 筛出关联镜头与配件）
+> 对应源码：[02-database-detail.md §4.5](./02-database-detail.md#_45-accessory-表--配件)（`accessory.ref_id`）、[§4.4](./02-database-detail.md#_44-lens-表--镜头)（`lens.ref_id`）、[04-frontend-detail.md §7.3](./04-frontend-detail.md#_73-dashboardvue--仪表盘)（按 `ref_id` 筛出关联镜头与配件）
 
 **4. 设计决策**
 
@@ -81,7 +81,7 @@ camera/camcorder ←── accessory (ref_id)
 - **分表存储**：4 类设备分开存储，避免大量 NULL 字段
 - **字符串角色**：角色用字符串存储（`'user'`），代码中映射为整数比较
 
-> 对应源码：[02-database-detail.md §5.1](./02-database-detail.md#51-实现原理)（文本 ID 生成）、[§4.2-§4.5](./02-database-detail.md#42-camera-表--相机)（分表存储）、[03-backend-detail.md §4.1](./03-backend-detail.md#41-完整代码)（`ROLE_LEVEL` 常量）、§4.2（等级比较）
+> 对应源码：[02-database-detail.md §5.1](./02-database-detail.md#_51-实现原理)（文本 ID 生成）、[§4.2-§4.5](./02-database-detail.md#_42-camera-表--相机)（分表存储）、[03-backend-detail.md §4.1](./03-backend-detail.md#_41-完整代码)（`ROLE_LEVEL` 常量）、§4.2（等级比较）
 
 ---
 
@@ -111,7 +111,7 @@ camera/camcorder ←── accessory (ref_id)
 
 对于我们的场景（4 类设备、少量数据），文本 ID 更友好。
 
-> 对应源码：[02-database-detail.md §5.1](./02-database-detail.md#51-实现原理)（`next_id` 用 `表名 + 序号` 拼出主键）
+> 对应源码：[02-database-detail.md §5.1](./02-database-detail.md#_51-实现原理)（`next_id` 用 `表名 + 序号` 拼出主键）
 
 **2. 角色权限比较**
 
@@ -125,7 +125,7 @@ if ROLE_LEVEL[user['role']] >= ROLE_LEVEL[required_role]:
     # 允许访问
 ```
 
-> 对应源码：[03-backend-detail.md §4.1](./03-backend-detail.md#41-完整代码)（`ROLE_LEVEL` 常量）、§4.2（`require_role` 里的等级比较）
+> 对应源码：[03-backend-detail.md §4.1](./03-backend-detail.md#_41-完整代码)（`ROLE_LEVEL` 常量）、§4.2（`require_role` 里的等级比较）
 
 **3. 登录失败锁定**
 
@@ -136,7 +136,7 @@ if ROLE_LEVEL[user['role']] >= ROLE_LEVEL[required_role]:
 锁定过期：自动解锁，重置计数
 ```
 
-> 对应源码：[03-backend-detail.md §5.1](./03-backend-detail.md#51-完整代码)（锁定期直接拒绝、过期自动解锁、失败计数 +1、满 5 次写入 `lockout_until`、登录成功清零）
+> 对应源码：[03-backend-detail.md §5.1](./03-backend-detail.md#_51-完整代码)（锁定期直接拒绝、过期自动解锁、失败计数 +1、满 5 次写入 `lockout_until`、登录成功清零）
 
 **4. 分表 vs 合表**
 
@@ -147,7 +147,7 @@ if ROLE_LEVEL[user['role']] >= ROLE_LEVEL[required_role]:
 
 选择分表：4 类设备差异明显，分表更清晰。
 
-> 对应源码：[02-database-detail.md §4.2-§4.5](./02-database-detail.md#42-camera-表--相机)、[03-backend-detail.md §6.1](./03-backend-detail.md#61-完整代码)（`TABLE_FIELDS` 按表列出各自允许的字段）
+> 对应源码：[02-database-detail.md §4.2-§4.5](./02-database-detail.md#_42-camera-表--相机)、[03-backend-detail.md §6.1](./03-backend-detail.md#_61-完整代码)（`TABLE_FIELDS` 按表列出各自允许的字段）
 
 **5. 跨表关联**
 
@@ -157,7 +157,7 @@ if ROLE_LEVEL[user['role']] >= ROLE_LEVEL[required_role]:
 - **简单性**：应用层保证一致性
 - **删除策略**：机身删除后，镜头的 `ref_id` 变成悬空引用，前端过滤掉即可
 
-> 对应源码：[03-backend-detail.md §6.1](./03-backend-detail.md#61-完整代码)（`ref_id` 只是普通字段，没有外键约束）、[04-frontend-detail.md §7.3](./04-frontend-detail.md#73-dashboardvue--仪表盘)（悬空的 `ref_id` 匹配不到机身，自然被过滤掉）
+> 对应源码：[03-backend-detail.md §6.1](./03-backend-detail.md#_61-完整代码)（`ref_id` 只是普通字段，没有外键约束）、[04-frontend-detail.md §7.3](./04-frontend-detail.md#_73-dashboardvue--仪表盘)（悬空的 `ref_id` 匹配不到机身，自然被过滤掉）
 
 ---
 
@@ -179,7 +179,7 @@ if ROLE_LEVEL[user['role']] >= ROLE_LEVEL[required_role]:
 - **脚本结构**：按提示词要求，按顺序创建 5 张表（users → camera → camcorder → lens → accessory），每张表创建后打印确认信息
 - **关键实现**：使用 `CREATE TABLE IF NOT EXISTS` 保证幂等性；数据库文件路径用 `Path(__file__).parent / "HopeEquipment.db"` 自动定位
 
-> 对应源码：[02-database-detail.md §7.1](./02-database-detail.md#71-建表脚本)
+> 对应源码：[02-database-detail.md §7.1](./02-database-detail.md#_71-建表脚本)
 
 **运行方式**：
 
@@ -212,7 +212,7 @@ python db/create_database_schema.py
 - **空表处理**：`MAX` 返回 `NULL` 时用 `or 0` 兜底，得到 `表名1`
 - **并发风险**：读取 `MAX` 与写入新行不在同一事务里，极高并发下可能重复 ID；本项目并发极低，完全够用
 
-> 对应源码：[02-database-detail.md §5.1](./02-database-detail.md#51-实现原理)（最终实现）、[03-backend-detail.md §6.1](./03-backend-detail.md#61-完整代码)（新增记录时先 `db.next_id(table)` 再 `db.insert`）
+> 对应源码：[02-database-detail.md §5.1](./02-database-detail.md#_51-实现原理)（最终实现）、[03-backend-detail.md §6.1](./03-backend-detail.md#_61-完整代码)（新增记录时先 `db.next_id(table)` 再 `db.insert`）
 
 ---
 
@@ -233,7 +233,7 @@ python db/create_database_schema.py
 - **查询关联数据**：用 `LEFT JOIN` 按 `ref_id` 关联；本项目实际在前端用 `filter` 组装（不做 SQL JOIN）
 - **边界情况**：空表时 `MAX` 返回 `NULL`，`or 0` 兜底得到 `表名1`；删除中间记录后仍按当前最大值递增（基于 `MAX`，不是计数）
 
-> 对应源码：[03-backend-detail.md §6.1](./03-backend-detail.md#61-完整代码)（插入）、[§2.1](./03-backend-detail.md#21-完整代码)（`insert` 实现）、[04-frontend-detail.md §7.3](./04-frontend-detail.md#73-dashboardvue--仪表盘)（前端关联查询）
+> 对应源码：[03-backend-detail.md §6.1](./03-backend-detail.md#_61-完整代码)（插入）、[§2.1](./03-backend-detail.md#_21-完整代码)（`insert` 实现）、[04-frontend-detail.md §7.3](./04-frontend-detail.md#_73-dashboardvue--仪表盘)（前端关联查询）
 
 ---
 

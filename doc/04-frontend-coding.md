@@ -36,7 +36,7 @@ cd frontend
 npm install
 ```
 
-> 对应源码：[04-frontend-detail.md §1.2](./04-frontend-detail.md#12-安装依赖)（初始化产物的最终形态，`devDependencies` 里还多了 `unplugin-vue-components`、`vue-tsc`）
+> 对应源码：[04-frontend-detail.md §1.2](./04-frontend-detail.md#_12-安装依赖)（初始化产物的最终形态，`devDependencies` 里还多了 `unplugin-vue-components`、`vue-tsc`）
 
 **安装依赖**：
 
@@ -45,7 +45,7 @@ npm install vue-router pinia ant-design-vue @ant-design/icons-vue axios
 npm install -D unplugin-vue-components
 ```
 
-> 对应源码：[04-frontend-detail.md §1.2](./04-frontend-detail.md#12-安装依赖)（`dependencies`、`devDependencies`）
+> 对应源码：[04-frontend-detail.md §1.2](./04-frontend-detail.md#_12-安装依赖)（`dependencies`、`devDependencies`）
 
 **Vite 配置**：
 
@@ -82,7 +82,7 @@ export default defineConfig({
 })
 ```
 
-> 对应源码：[04-frontend-detail.md §1.3](./04-frontend-detail.md#13-vite-配置)
+> 对应源码：[04-frontend-detail.md §1.3](./04-frontend-detail.md#_13-vite-配置)
 
 ---
 
@@ -104,7 +104,7 @@ export default defineConfig({
 - **main.ts**：注册 Vue、Pinia、Router、Ant Design Vue（全量导入 `reset.css`）
 - **App.vue**：`<a-config-provider :locale="zhCN">` 设置中文，全局样式加表格偶数行蓝色斑马纹
 
-> 对应源码：[04-frontend-detail.md §2.1](./04-frontend-detail.md#21-maints)、[§2.2](./04-frontend-detail.md#22-appvue)
+> 对应源码：[04-frontend-detail.md §2.1](./04-frontend-detail.md#_21-maints)、[§2.2](./04-frontend-detail.md#_22-appvue)
 
 ---
 
@@ -132,7 +132,7 @@ export default defineConfig({
 - **懒加载**：所有页面用 `() => import('./pages/xxx.vue')`
 - **导航守卫**：`beforeEach` 里先 `loadUser()`，然后按 `guest` / `requiresAuth` / `minRole` 三个条件分支放行或重定向
 
-> 对应源码：[04-frontend-detail.md §3.1](./04-frontend-detail.md#31-路由定义)
+> 对应源码：[04-frontend-detail.md §3.1](./04-frontend-detail.md#_31-路由定义)
 
 ---
 
@@ -157,7 +157,7 @@ export default defineConfig({
 - **计算属性**：`isAuthenticated`、`role`、`roleLevel`、`canDelete`、`canManageUsers`
 - **方法**：`loadUser()`（从 `/api/auth/me` 加载）、`login()`、`logout()`、`hasRole(minRole)`
 
-> 对应源码：[04-frontend-detail.md §4.1](./04-frontend-detail.md#41-完整代码)
+> 对应源码：[04-frontend-detail.md §4.1](./04-frontend-detail.md#_41-完整代码)
 
 ---
 
@@ -186,7 +186,7 @@ export default defineConfig({
 - **API 函数**：认证相关（`getSetupStatus` / `login` / `logout` / `getMyInfo`）、设备 CRUD（`listEquipments` / `createEquipment` / `updateEquipment` / `deleteEquipment`，通用接收表名）
 - **请求反馈封装**：`requestWithFeedback(action, successText)` 统一处理成功提示和错误提示
 
-> 对应源码：[04-frontend-detail.md §5.1-§5.5](./04-frontend-detail.md#51-axios-实例)
+> 对应源码：[04-frontend-detail.md §5.1-§5.5](./04-frontend-detail.md#_51-axios-实例)
 
 ---
 
@@ -224,7 +224,7 @@ export default defineConfig({
 - **内容区**：`<RouterView />`，外层 `overflow-y: auto`，侧边栏和顶栏 `overflow: hidden`
 - **整体布局**：`height: 100vh`，`<a-layout class="layout">` 包裹
 
-> 对应源码：[04-frontend-detail.md §6.1-§6.3](./04-frontend-detail.md#61-模板结构)
+> 对应源码：[04-frontend-detail.md §6.1-§6.3](./04-frontend-detail.md#_61-模板结构)
 
 ---
 
@@ -250,11 +250,11 @@ export default defineConfig({
 - **登录逻辑**：`authStore.login()` 后从 `route.query.redirect` 读取跳转目标（需校验是否以 `/` 开头防开放重定向）
 - **样式**：浮动粒子背景 + 居中卡片，粒子用 CSS 动画实现
 
-> 对应源码：[04-frontend-detail.md §7.1](./04-frontend-detail.md#71-loginvue--登录页)
+> 对应源码：[04-frontend-detail.md §7.1](./04-frontend-detail.md#_71-loginvue--登录页)
 
 ---
 
-> 对应源码：[04-frontend-detail.md §7.1](./04-frontend-detail.md#71-loginvue--登录页)
+> 对应源码：[04-frontend-detail.md §7.1](./04-frontend-detail.md#_71-loginvue--登录页)
 
 ---
 
@@ -285,7 +285,7 @@ export default defineConfig({
 - **响应式布局**：`<a-row :gutter="16">` + `<a-col :xs="24" :sm="12" :md="8" :lg="6">`
 - **数据加载**：`Promise.all` 并行请求 4 类设备，按状态分类统计
 
-> 对应源码：[04-frontend-detail.md §7.3](./04-frontend-detail.md#73-dashboardvue--仪表盘)
+> 对应源码：[04-frontend-detail.md §7.3](./04-frontend-detail.md#_73-dashboardvue--仪表盘)
 
 ---
 
@@ -317,7 +317,7 @@ export default defineConfig({
 - **操作列**：编辑、删除（`authStore.canDelete` 控制显示，`<a-popconfirm>` 二次确认）
 - **CRUD 逻辑**：`loadItems()` / `openCreate()` / `openEdit()` / `handleSave()` / `handleDelete()`，统一用 `requestWithFeedback` 提示
 
-> 对应源码：[04-frontend-detail.md §7.4](./04-frontend-detail.md#74-cameravue--设备管理页)
+> 对应源码：[04-frontend-detail.md §7.4](./04-frontend-detail.md#_74-cameravue--设备管理页)
 
 ---
 
@@ -344,7 +344,7 @@ export default defineConfig({
 - **数据填充**：`watch(() => props.open)` 监听弹窗打开，编辑模式填充 `editing` 数据，新增模式初始化为空
 - **提交**：`handleSubmit()` 时 `emit('submit', formValues)`
 
-> 对应源码：[04-frontend-detail.md §8.1](./04-frontend-detail.md#81-equipmentformmodalvue--通用设备表单弹窗)
+> 对应源码：[04-frontend-detail.md §8.1](./04-frontend-detail.md#_81-equipmentformmodalvue--通用设备表单弹窗)
 
 ---
 
