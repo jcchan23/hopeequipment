@@ -36,7 +36,7 @@ backend/
 └── db.py                 # 数据库操作封装
 ```
 
-> 对应源码：[03-backend-detail.md §3.1](./03-backend-detail.md#_31-完整代码)（main.py）、[§2.1](./03-backend-detail.md#_21-完整代码)（db.py）——这一轮还没有 `auth.py` 和 `routers/`，它们在 §5、§4 才出现，优先搭建数据库和后端的桥梁，以及后端的启动脚本。
+> 对应源码：[03-backend-detail.md §3.1](./03-backend-detail.md#_3-1-完整代码)（main.py）、[§2.1](./03-backend-detail.md#_2-1-完整代码)（db.py）——这一轮还没有 `auth.py` 和 `routers/`，它们在 §5、§4 才出现，优先搭建数据库和后端的桥梁，以及后端的启动脚本。
 
 **依赖文件**：
 
@@ -46,13 +46,13 @@ fastapi
 uvicorn
 ```
 
-> 对应源码：[03-backend-detail.md §1.2](./03-backend-detail.md#_12-依赖)（最终多了一个 `pwdlib[argon2]`，见 §5）
+> 对应源码：[03-backend-detail.md §1.2](./03-backend-detail.md#_1-2-依赖)（最终多了一个 `pwdlib[argon2]`，见 §5）
 
 **说明**：
 - **fastapi** — Web 框架，提供路由、依赖注入、自动文档
 - **uvicorn** — ASGI 服务器，运行 FastAPI 应用
 
-> 对应源码：[03-backend-detail.md §1.2](./03-backend-detail.md#_12-依赖)
+> 对应源码：[03-backend-detail.md §1.2](./03-backend-detail.md#_1-2-依赖)
 
 ---
 
@@ -75,7 +75,7 @@ uvicorn
 - **CORS 配置**：允许前端开发服务器 `http://localhost:5173` 访问
 - **测试路由**：`/api/health` 返回 `{'status': 'ok'}`（最终版本没有保留）
 
-> 对应源码：[03-backend-detail.md §3.1](./03-backend-detail.md#_31-完整代码)（`FastAPI(title=...)`、CORS）
+> 对应源码：[03-backend-detail.md §3.1](./03-backend-detail.md#_3-1-完整代码)（`FastAPI(title=...)`、CORS）
 
 ---
 
@@ -101,7 +101,7 @@ uvicorn
 - **参数化查询**：使用 `?` 占位符，防止 SQL 注入
 - **`with` 语句**：自动管理连接和事务
 
-> 对应源码：[03-backend-detail.md §2.1](./03-backend-detail.md#_21-完整代码)
+> 对应源码：[03-backend-detail.md §2.1](./03-backend-detail.md#_2-1-完整代码)
 
 ---
 
@@ -125,7 +125,7 @@ uvicorn
 - **工厂模式**：`create_router(table)` 传入表名，返回完整 CRUD 路由（5 个端点），避免重复代码
 - **删除鉴权**：`delete_role` 参数控制删除操作需要的角色，默认为当前用户
 
-> 对应源码：[03-backend-detail.md §6.1](./03-backend-detail.md#_61-完整代码)
+> 对应源码：[03-backend-detail.md §6.1](./03-backend-detail.md#_6-1-完整代码)
 
 ---
 
@@ -153,7 +153,7 @@ uvicorn
 - **滑动窗口续期**：Session 剩余时间低于 5 分钟时自动续期 30 分钟
 - **角色等级**：`ROLE_LEVEL = {'user': 1, 'admin': 2, 'super_admin': 3}`，`require_role(min_role)` 工厂函数做权限检查
 
-> 对应源码：[03-backend-detail.md §4.1](./03-backend-detail.md#_41-完整代码)、[§1.2](./03-backend-detail.md#_12-依赖)
+> 对应源码：[03-backend-detail.md §4.1](./03-backend-detail.md#_4-1-完整代码)、[§1.2](./03-backend-detail.md#_1-2-依赖)
 
 ---
 
@@ -182,7 +182,7 @@ uvicorn
 - **登录失败锁定**：连续 5 次失败锁定 15 分钟，锁定期间直接拒绝，过期自动解锁
 - **权限检查**：删除用户时检查当前用户等级是否高于目标用户，防止管理同级或更高级别用户
 
-> 对应源码：[03-backend-detail.md §5.1](./03-backend-detail.md#_51-完整代码)
+> 对应源码：[03-backend-detail.md §5.1](./03-backend-detail.md#_5-1-完整代码)
 
 ---
 
@@ -206,7 +206,7 @@ uvicorn
 - **启动时建表**：`users` 表在启动时 `CREATE TABLE IF NOT EXISTS`，保证幂等
 - **SPA 托管**：生产模式下 `StaticFiles` 挂载 `/assets`，`/{full_path:path}` 兜底返回 `index.html`
 
-> 对应源码：[03-backend-detail.md §3.1](./03-backend-detail.md#_31-完整代码)
+> 对应源码：[03-backend-detail.md §3.1](./03-backend-detail.md#_3-1-完整代码)
 
 ---
 
@@ -230,7 +230,7 @@ uvicorn
 - **查看 API 文档**：访问 `http://localhost:8000/docs`，FastAPI 自动生成 Swagger UI
 - **测试流程**：检查初始化状态 → 初始化超级管理员 → 登录（保存 Cookie）→ 创建相机 → 查询列表
 
-> 对应源码：[05-deploy.md §4.3](./05-deploy.md#_43-测试后端启动)（生产启动）、[03-backend-detail.md §3.1](./03-backend-detail.md#_31-完整代码)（`/docs` 自动生成）、[§5.1](./03-backend-detail.md#_51-完整代码)（setup/login）、[§6.1](./03-backend-detail.md#_61-完整代码)（CRUD 路由）
+> 对应源码：[05-deploy.md §4.3](./05-deploy.md#_4-3-测试后端启动)（生产启动）、[03-backend-detail.md §3.1](./03-backend-detail.md#_3-1-完整代码)（`/docs` 自动生成）、[§5.1](./03-backend-detail.md#_5-1-完整代码)（setup/login）、[§6.1](./03-backend-detail.md#_6-1-完整代码)（CRUD 路由）
 
 ---
 
