@@ -1,4 +1,4 @@
-# 设备管理系统 (HopeEquipment)
+# 厚朴设备管理系统 (HopeEquipment)
 
 面向摄影器材（相机 / 摄像机 / 镜头 / 配件）的管理系统，提供完整增删改查、三级角色权限、Cookie Session 认证与数据可视化仪表盘。
 
